@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		AA2750F916600BC30009E012 /* Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = AA2750FC16600BC30009E012 /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildPhases = (
+				AA2750FE16600BCA0009E012 /* Generate Appledoc Documentation */,
+			);
+			dependencies = (
+			);
+			name = Documentation;
+			productName = Documentation;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		AA7626EE165F913D00C27F44 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA7626ED165F913D00C27F44 /* Cocoa.framework */; };
 		AA7626F8165F913D00C27F44 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA7626F6165F913D00C27F44 /* InfoPlist.strings */; };
@@ -172,6 +186,7 @@
 			projectRoot = "";
 			targets = (
 				AA7626E8165F913D00C27F44 /* CNBaseView Example */,
+				AA2750F916600BC30009E012 /* Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -189,6 +204,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AA2750FE16600BCA0009E012 /* Generate Appledoc Documentation */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Appledoc Documentation";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "cd ../\n`which appledoc` .\n./bin/deployDoc.sh\nexit 0";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AA7626E5165F913D00C27F44 /* Sources */ = {
@@ -231,6 +264,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AA2750FA16600BC30009E012 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AA2750FB16600BC30009E012 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		AA762705165F913D00C27F44 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -311,6 +358,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AA2750FC16600BC30009E012 /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA2750FA16600BC30009E012 /* Debug */,
+				AA2750FB16600BC30009E012 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		AA7626E3165F913D00C27F44 /* Build configuration list for PBXProject "CNBaseView Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

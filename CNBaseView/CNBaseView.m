@@ -53,9 +53,19 @@ static NSFont *defaultTextFont;
 
 + (void)initialize
 {
-    defaultTextColor = [NSColor colorWithDeviceRed:0.731 green:0.731 blue:0.731 alpha:1.000];
+    defaultTextColor = [NSColor lightGrayColor];
     defaultShadowColor = [NSColor whiteColor];
-    defaultTextFont = [NSFont fontWithName:@"HelveticaNeue-Medium" size:19.0f];
+    defaultTextFont = [NSFont fontWithName:@"HelveticaNeue-Medium" size:18.0f];
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self commonConfiguration];
+        [self calculateTextBoxLines];
+    }
+    return self;
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -68,11 +78,23 @@ static NSFont *defaultTextFont;
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (id)initWithIcon:(NSImage *)icon text:(NSString *)text
 {
-    self = [super initWithCoder:aDecoder];
+    self = [self init];
     if (self) {
-        [self commonConfiguration];
+        _icon = icon;
+        _text = text;
+        [self calculateTextBoxLines];
+    }
+    return self;
+}
+
+- (id)initWithIcon:(NSImage *)icon attributedText:(NSAttributedString *)attributedText
+{
+    self = [self init];
+    if (self) {
+        _icon = icon;
+        _attributedText = attributedText;
         [self calculateTextBoxLines];
     }
     return self;
