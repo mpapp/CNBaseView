@@ -1,6 +1,10 @@
 ##Overview
 `CNBaseView` is a subclass of `NSView` that can show an icon and a text message if it has no subviews. Both, the icon and the message text are optional. If you keep it empty `CNBaseView` acts as a normal `NSView`.
 
+Here is a shot of the included example application:
+
+![CNBackstageController Example Application](https://dl.dropbox.com/u/34133216/WebImages/Github/CNBaseView.png)
+
 ###Requirements
 `CNBackstageController` was written using ARC and should run on 10.7 and above.
 
