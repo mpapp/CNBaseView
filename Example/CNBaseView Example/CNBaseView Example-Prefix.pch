@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the 'CNBaseView Example' target in the 'CNBaseView Example' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+    #import "CNLog.h"
+#endif
