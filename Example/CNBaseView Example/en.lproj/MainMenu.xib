@@ -1592,6 +1592,7 @@
 							<string key="NSFrame">{{566, 3}, {16, 69}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSSliderCell" key="NSCell" id="400225473">
@@ -1665,7 +1666,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="694933178">
 								<int key="NSCellFlags">68157504</int>
 								<int key="NSCellFlags2">71566336</int>
-								<string key="NSContents">40</string>
+								<string key="NSContents">60</string>
 								<reference key="NSSupport" ref="22"/>
 								<string key="NSCellIdentifier">_NS:1535</string>
 								<reference key="NSControlView" ref="35588349"/>
@@ -1689,7 +1690,7 @@
 								<string key="NSContents"/>
 								<string key="NSCellIdentifier">_NS:9</string>
 								<reference key="NSControlView" ref="699016906"/>
-								<double key="NSMaxValue">40</double>
+								<double key="NSMaxValue">60</double>
 								<double key="NSMinValue">0.0</double>
 								<double key="NSValue">10.526315789473683</double>
 								<double key="NSAltIncValue">0.0</double>
@@ -1752,7 +1753,7 @@
 								<string key="NSFrameSize">{460, 259}</string>
 								<reference key="NSSuperview" ref="628627600"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="420425784"/>
+								<reference key="NSNextKeyView" ref="438814452"/>
 								<string key="NSReuseIdentifierKey">_NS:13</string>
 								<object class="NSTextContainer" key="NSTextContainer" id="704572406">
 									<object class="NSLayoutManager" key="NSLayoutManager">
@@ -2003,6 +2004,7 @@ wGw</bytes>
 						<string key="NSFrame">{{447, 1}, {16, 261}}</string>
 						<reference key="NSSuperview" ref="133728227"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:83</string>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 						<reference key="NSTarget" ref="133728227"/>
@@ -2029,7 +2031,7 @@ wGw</bytes>
 				<string key="NSFrameSize">{464, 263}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="628627600"/>
+				<reference key="NSNextKeyView" ref="420425784"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<int key="NSsFlags">133651</int>
 				<reference key="NSVScroller" ref="438814452"/>

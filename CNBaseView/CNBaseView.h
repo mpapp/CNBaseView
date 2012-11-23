@@ -63,4 +63,9 @@
  ...
  */
 @property (assign, nonatomic) CGFloat iconTextMargin;
+
+/**
+ ...
+ */
+@property (assign) BOOL preventDrawingWithSubviews;
 @end

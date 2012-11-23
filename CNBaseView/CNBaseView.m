@@ -84,6 +84,7 @@ static NSFont *defaultTextFont;
     _textBoxWidth = kDefaultTextboxWidth;
     _iconVerticalOffset = kDefaultIconVerticalOffset;
     _iconTextMargin =  kDefaultIconTextMargin;
+    _preventDrawingWithSubviews = YES;
 
     /// the text box
     NSShadow *textShadow = [[NSShadow alloc] init];
@@ -160,10 +161,9 @@ static NSFont *defaultTextFont;
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    if ([[self subviews] count] > 0) {
+    if ([[self subviews] count] > 0 && self.preventDrawingWithSubviews)
         return;
-    }
-    
+
     CGFloat textBoxOriginX = (NSWidth(dirtyRect) - self.textBoxWidth) / 2;
     CGFloat textBoxOriginY;
 
