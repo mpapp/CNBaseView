@@ -63,6 +63,10 @@
 	
 	<option value="//api/name/initWithIcon:text:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithIcon:text:</option>
 	
+	<option value="//api/name/popChildViewWithAnimationEffect:usingCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- popChildViewWithAnimationEffect:usingCompletionHandler:</option>
+	
+	<option value="//api/name/pushChildView:withAnimationEffect:usingCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- pushChildView:withAnimationEffect:usingCompletionHandler:</option>
+	
 	
 	
 </select>
@@ -82,6 +86,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_View Content">View Content</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_View Behavior">View Behavior</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Handling Subviews">Handling Subviews</a></span></li>
 	
 </ul></li>
 
@@ -116,6 +122,10 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithIcon:attributedText:">initWithIcon:attributedText:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithIcon:text:">initWithIcon:text:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/popChildViewWithAnimationEffect:usingCompletionHandler:">popChildViewWithAnimationEffect:usingCompletionHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pushChildView:withAnimationEffect:usingCompletionHandler:">pushChildView:withAnimationEffect:usingCompletionHandler:</a></span></li>
 	
 </ul></li>
 
@@ -240,6 +250,28 @@
 		<span class="tooltip"><p>Property with a boolean value that indicates whether <code>CNBaseView</code> should draw an <a href="#//api/name/icon">icon</a> and <a href="#//api/name/text">text</a> if there are subviews present or not.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Handling Subviews" name="task_Handling Subviews"></a>
+						<h3 class="subsubtitle task-title">Handling Subviews</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/pushChildView:withAnimationEffect:usingCompletionHandler:">&ndash;&nbsp;pushChildView:withAnimationEffect:usingCompletionHandler:</a></code>
+		<span class="tooltip"><p>Pushs in another view as subview using the defined animation effect.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/popChildViewWithAnimationEffect:usingCompletionHandler:">&ndash;&nbsp;popChildViewWithAnimationEffect:usingCompletionHandler:</a></code>
+		<span class="tooltip"><p>Pops the child view and updates the display.</p></span>
+	</span>
+	
 	
 </li>
 						</ul>
@@ -675,6 +707,119 @@ NSKernAttributeName :               @0.95f
 	
 </div>
 						
+						<div class="section-method">
+	<a name="//api/name/popChildViewWithAnimationEffect:usingCompletionHandler:" title="popChildViewWithAnimationEffect:usingCompletionHandler:"></a>
+	<h3 class="subsubtitle method-title">popChildViewWithAnimationEffect:usingCompletionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Pops the child view and updates the display.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)popChildViewWithAnimationEffect:(CNChildViewAnimationEffect)<em>effect</em> usingCompletionHandler:(void ( ^ ) ( void ))<em>completionHandler</em></code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<div class="warning"><p><strong>Warning:</strong> There is still a drawing bug if animation effect is one of the sliding effects!</p></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CNBaseView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/pushChildView:withAnimationEffect:usingCompletionHandler:" title="pushChildView:withAnimationEffect:usingCompletionHandler:"></a>
+	<h3 class="subsubtitle method-title">pushChildView:withAnimationEffect:usingCompletionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Pushs in another view as subview using the defined animation effect.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)pushChildView:(NSView *)<em>childView</em> withAnimationEffect:(CNChildViewAnimationEffect)<em>effect</em> usingCompletionHandler:(void ( ^ ) ( void ))<em>completionHandler</em></code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>There are several animation effects available:</p>
+
+<pre><code>typedef enum {
+    CNChildViewAnimationEffectNone = 0,
+    CNChildViewAnimationEffectFade,
+    CNChildViewAnimationEffectSlideTop,
+    CNChildViewAnimationEffectSlideRight,
+    CNChildViewAnimationEffectSlideBottom,
+    CNChildViewAnimationEffectSlideLeft
+} CNChildViewAnimationEffect;
+</code></pre>
+
+<p><code>CNChildViewAnimationEffectNone</code><br />
+The child view will be shown immediatly without an animation effect. It abolishes the setting of <a href="#//api/name/preventDrawingWithSubviews">preventDrawingWithSubviews</a>, the <a href="#//api/name/icon">icon</a> and <a href="#//api/name/text">text</a> are not drawn.</p>
+
+<p><code>CNChildViewAnimationEffectFade</code><br />
+The child view will fade in.</p>
+
+<p><code>CNChildViewAnimationEffectSlideTop</code><br />
+The child view will silde in from the top edge downwards.</p>
+
+<p><code>CNChildViewAnimationEffectSlideRight</code><br />
+The child view will silde in from the right edge to the left.</p>
+
+<p><code>CNChildViewAnimationEffectSlideBottom</code><br />
+The child view will silde in from the bottom edge upwards.</p>
+
+<p><code>CNChildViewAnimationEffectSlideLeft</code><br />
+The child view will silde in from left edge to the right.</p>
+
+<p>After the animation is done the completionHandler is executed.</p><div class="note"><p><strong>Note:</strong> If you decide to use one of these effects and the value of <a href="#//api/name/preventDrawingWithSubviews">preventDrawingWithSubviews</a> is set to <code>NO</code> then you have to ensure that
+your pushing child view has an opaque background. Otherwise the drawn <a href="#//api/name/icon">icon</a> and <a href="#//api/name/text">text</a> message will show through.</p></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CNBaseView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
 					</div>
 					
 					
@@ -688,7 +833,7 @@ NSKernAttributeName :               @0.95f
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 cocoa:naut. All rights reserved. (Last updated: 2012-11-23)</span><br />
+						<p><span class="copyright">&copy; 2012 cocoa:naut. All rights reserved. (Last updated: 2012-11-24)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						

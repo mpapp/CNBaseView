@@ -18,7 +18,8 @@
 @property (strong) IBOutlet NSSlider *textBoxWidthSlider;
 @property (strong) IBOutlet NSSlider *iconOffsetSlider;
 @property (strong) IBOutlet NSSlider *iconTextMarginSlider;
-@property (strong) IBOutlet NSTextView *textView;
+@property (strong) IBOutlet NSButton *preventDrawingCheckbox;
+@property (strong) IBOutlet NSPopUpButton *animationEffectPopupButton;
 
 
 - (IBAction)addIconCheckboxAction:(id)sender;
@@ -27,5 +28,7 @@
 - (IBAction)textBoxWidthSliderAction:(id)sender;
 - (IBAction)iconOffsetSliderAction:(id)sender;
 - (IBAction)iconTextMarginSliderAction:(id)sender;
+- (IBAction)preventDrawingCheckboxAction:(id)sender;
+- (IBAction)animationEffectPopupButtonAction:(id)sender;
 
 @end

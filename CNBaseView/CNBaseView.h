@@ -30,8 +30,20 @@
 
 #import <Cocoa/Cocoa.h>
 
+
+typedef enum {
+    CNChildViewAnimationEffectNone = 0,
+    CNChildViewAnimationEffectFade,
+    CNChildViewAnimationEffectSlideTop,
+    CNChildViewAnimationEffectSlideRight,
+    CNChildViewAnimationEffectSlideBottom,
+    CNChildViewAnimationEffectSlideLeft
+} CNChildViewAnimationEffect;
+
+
 @interface CNBaseView : NSView
 
+#pragma mark View Creation
 /** @name View Creation */
 
 /**
@@ -59,6 +71,8 @@
 - (id)initWithIcon:(NSImage *)icon attributedText:(NSAttributedString *)attributedText;
 
 
+
+#pragma mark - View Content
 /** @name View Content */
 
 /**
@@ -82,6 +96,7 @@
 
 
 
+#pragma mark - View Behavior
 /** @name View Behavior */
 
 /**
@@ -118,4 +133,55 @@
  @param preventDrawingWithSubviews  `YES` (default value) will stop drawing the icon and text if there are subviews available. `NO` will always draw the icon and text.
  */
 @property (assign) BOOL preventDrawingWithSubviews;
+
+
+#pragma mark - Handling Subviews
+/** @name Handling Subviews */
+
+/**
+ Pushs in another view as subview using the defined animation effect.
+ 
+ There are several animation effects available:
+ 
+    typedef enum {
+        CNChildViewAnimationEffectNone = 0,
+        CNChildViewAnimationEffectFade,
+        CNChildViewAnimationEffectSlideTop,
+        CNChildViewAnimationEffectSlideRight,
+        CNChildViewAnimationEffectSlideBottom,
+        CNChildViewAnimationEffectSlideLeft
+    } CNChildViewAnimationEffect;
+ 
+ `CNChildViewAnimationEffectNone`<br />
+ The child view will be shown immediatly without an animation effect. It abolishes the setting of preventDrawingWithSubviews, the icon and text are not drawn.
+
+ `CNChildViewAnimationEffectFade`<br />
+ The child view will fade in.
+
+ `CNChildViewAnimationEffectSlideTop`<br />
+ The child view will silde in from the top edge downwards.
+
+ `CNChildViewAnimationEffectSlideRight`<br />
+ The child view will silde in from the right edge to the left.
+
+ `CNChildViewAnimationEffectSlideBottom`<br />
+ The child view will silde in from the bottom edge upwards.
+
+ `CNChildViewAnimationEffectSlideLeft`<br />
+ The child view will silde in from left edge to the right.
+
+ After the animation is done the completionHandler is executed.
+
+ @note If you decide to use one of these effects and the value of preventDrawingWithSubviews is set to `NO` then you have to ensure that
+ your pushing child view has an opaque background. Otherwise the drawn icon and text message will show through.
+ */
+- (void)pushChildView:(NSView *)childView withAnimationEffect:(CNChildViewAnimationEffect)effect usingCompletionHandler:(void(^)(void))completionHandler;
+
+/**
+ Pops the child view and updates the display.
+ 
+ @warning There is still a drawing bug if animation effect is one of the sliding effects!
+ */
+- (void)popChildViewWithAnimationEffect:(CNChildViewAnimationEffect)effect usingCompletionHandler:(void(^)(void))completionHandler;
+
 @end

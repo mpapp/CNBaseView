@@ -28,8 +28,11 @@
  THE SOFTWARE.
  */
 
+#import <QuartzCore/QuartzCore.h>
 #import "CNBaseView.h"
 
+
+static const CGFloat animationDuration = 0.30f;
 
 static const CGFloat kDefaultTextboxWidth = 350.0f;
 static const CGFloat kDefaultIconVerticalOffset = 10.0f;
@@ -41,6 +44,8 @@ static NSFont *defaultTextFont;
 @interface CNBaseView () {
     CGRect _calculatedTextBoxRect;
     NSDictionary *_textBoxAttributes;
+    NSMutableArray *_childViewStack;
+//    NSView *_childView;
 }
 - (void)commonConfiguration;
 - (void)calculateTextBoxLines;
@@ -107,6 +112,7 @@ static NSFont *defaultTextFont;
     _iconVerticalOffset = kDefaultIconVerticalOffset;
     _iconTextMargin =  kDefaultIconTextMargin;
     _preventDrawingWithSubviews = YES;
+    _childViewStack = [[NSMutableArray alloc] init];
 
     /// the text box
     NSShadow *textShadow = [[NSShadow alloc] init];
@@ -179,7 +185,7 @@ static NSFont *defaultTextFont;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma mark - View Drawing
+#pragma mark - NSView
 
 - (void)drawRect:(NSRect)dirtyRect
 {
@@ -206,6 +212,86 @@ static NSFont *defaultTextFont;
         _calculatedTextBoxRect.origin = NSMakePoint(textBoxOriginX, textBoxOriginY);
         [self.text drawInRect:_calculatedTextBoxRect withAttributes:_textBoxAttributes];
     }
+}
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark - Handling Subviews
+
+- (void)pushChildView:(NSView *)childView withAnimationEffect:(CNChildViewAnimationEffect)effect usingCompletionHandler:(void(^)(void))completionHandler
+{
+    [_childViewStack addObject:childView];
+    NSRect childViewFrame = childView.bounds;
+
+    switch (effect) {
+        case CNChildViewAnimationEffectFade:
+            [childView setAlphaValue:0.0f];
+            break;
+        case CNChildViewAnimationEffectSlideTop:    childViewFrame.origin.y = NSMaxY(self.frame)+1; break;
+        case CNChildViewAnimationEffectSlideRight:  childViewFrame.origin.x = NSMaxX(self.frame)+1; break;
+        case CNChildViewAnimationEffectSlideBottom: childViewFrame.origin.y = NSMinY(self.frame) - NSHeight(self.frame); break;
+        case CNChildViewAnimationEffectSlideLeft:   childViewFrame.origin.x = NSMinX(self.frame) - NSWidth(self.frame); break;
+        default:
+            break;
+    }
+    childView.frame = childViewFrame;
+    [self addSubview:childView];
+
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        context.duration = (effect != CNChildViewAnimationEffectNone ? animationDuration : 0.0f);
+        context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
+
+        switch (effect) {
+            case CNChildViewAnimationEffectFade:
+                [[childView animator]  setAlphaValue:1.0f];
+                break;
+            case CNChildViewAnimationEffectSlideTop:
+            case CNChildViewAnimationEffectSlideRight:
+            case CNChildViewAnimationEffectSlideBottom:
+            case CNChildViewAnimationEffectSlideLeft:
+                [[childView animator] setFrame:self.bounds];
+                break;
+            default:
+                break;
+        }
+
+    } completionHandler:^{
+        if (completionHandler) {
+            completionHandler();
+        }
+    }];
+}
+
+- (void)popChildViewWithAnimationEffect:(CNChildViewAnimationEffect)effect usingCompletionHandler:(void(^)(void))completionHandler
+{
+    NSView *lastChildView = [_childViewStack lastObject];
+    __block NSRect childViewFrame = lastChildView.frame;
+
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        context.duration = (effect != CNChildViewAnimationEffectNone ? animationDuration : 0.0f);
+        context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
+
+        switch (effect) {
+            case CNChildViewAnimationEffectFade:
+                [[lastChildView animator]  setAlphaValue:0.0f];
+                break;
+            case CNChildViewAnimationEffectSlideTop:    childViewFrame.origin.y = NSMaxY(self.frame)+1; break;
+            case CNChildViewAnimationEffectSlideRight:  childViewFrame.origin.x = NSMaxX(self.frame)+1; break;
+            case CNChildViewAnimationEffectSlideBottom: childViewFrame.origin.y = NSMinY(self.frame) - NSHeight(self.frame); break;
+            case CNChildViewAnimationEffectSlideLeft:   childViewFrame.origin.x = NSMinX(self.frame) - NSWidth(self.frame); break;
+            default:
+                break;
+        }
+        [[lastChildView animator] setFrame:childViewFrame];
+        [self setNeedsDisplay:YES];
+
+    } completionHandler:^{
+        [lastChildView removeFromSuperview];
+        if (completionHandler) {
+            completionHandler();
+        }
+    }];
 }
 
 @end
