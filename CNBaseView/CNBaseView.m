@@ -46,10 +46,10 @@ static NSFont *defaultTextFont;
     NSDictionary *_textBoxAttributes;
     NSMutableArray *_childViewStack;
     BOOL _isAnimating;
-//    NSView *_childView;
 }
 - (void)commonConfiguration;
-- (void)calculateTextBoxLines;
+- (void)calculateTextBoxRect;
+- (NSRect)frameForView:(NSView *)theView withAnimationEffect:(CNChildViewAnimationEffect)effect;
 @end
 
 @implementation CNBaseView
@@ -69,7 +69,7 @@ static NSFont *defaultTextFont;
     self = [super init];
     if (self) {
         [self commonConfiguration];
-        [self calculateTextBoxLines];
+        [self calculateTextBoxRect];
     }
     return self;
 }
@@ -79,7 +79,7 @@ static NSFont *defaultTextFont;
     self = [super initWithFrame:frame];
     if (self) {
         [self commonConfiguration];
-        [self calculateTextBoxLines];
+        [self calculateTextBoxRect];
     }
     return self;
 }
@@ -90,7 +90,7 @@ static NSFont *defaultTextFont;
     if (self) {
         _icon = icon;
         _text = text;
-        [self calculateTextBoxLines];
+        [self calculateTextBoxRect];
     }
     return self;
 }
@@ -101,7 +101,7 @@ static NSFont *defaultTextFont;
     if (self) {
         _icon = icon;
         _attributedText = attributedText;
-        [self calculateTextBoxLines];
+        [self calculateTextBoxRect];
     }
     return self;
 }
@@ -113,7 +113,7 @@ static NSFont *defaultTextFont;
     _iconVerticalOffset = kDefaultIconVerticalOffset;
     _iconTextMargin =  kDefaultIconTextMargin;
     _preventDrawingWithSubviews = YES;
-    _childViewStack = [[NSMutableArray alloc] init];
+    _childViewStack = [NSMutableArray array];
     _isAnimating = NO;
 
     /// the text box
@@ -147,7 +147,7 @@ static NSFont *defaultTextFont;
         _text = nil;
         _text = theText;
         _attributedText = [[NSAttributedString alloc] initWithString:_text attributes:_textBoxAttributes];
-        [self calculateTextBoxLines];
+        [self calculateTextBoxRect];
     }
 }
 
@@ -158,7 +158,7 @@ static NSFont *defaultTextFont;
         _attributedText = attributedText;
         _text = _attributedText.string;
         _textBoxAttributes = [_attributedText attributesAtIndex:0 effectiveRange:NULL];
-        [self calculateTextBoxLines];
+        [self calculateTextBoxRect];
     }
 }
 
@@ -166,7 +166,7 @@ static NSFont *defaultTextFont;
 {
     if (_textBoxWidth != textBoxWidth) {
         _textBoxWidth = textBoxWidth;
-        [self calculateTextBoxLines];
+        [self calculateTextBoxRect];
     }
 }
 
@@ -175,13 +175,28 @@ static NSFont *defaultTextFont;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Private Helper
 
-- (void)calculateTextBoxLines
+- (void)calculateTextBoxRect
 {
     if (![_text isEqualToString:@""]) {
         _calculatedTextBoxRect = [_text boundingRectWithSize:NSMakeSize(_textBoxWidth, 0)
                                                      options:NSStringDrawingUsesLineFragmentOrigin
                                                   attributes:_textBoxAttributes];
     }
+}
+
+- (NSRect)frameForView:(NSView *)theView withAnimationEffect:(CNChildViewAnimationEffect)effect
+{
+    NSRect frame = theView.bounds;
+    switch (effect) {
+        case CNChildViewAnimationEffectSlideTop:    frame.origin.y = NSMaxY(self.frame) - [[self window] contentBorderThicknessForEdge:NSMaxYEdge]; break;
+        case CNChildViewAnimationEffectSlideRight:  frame.origin.x = NSMaxX(self.frame); break;
+        case CNChildViewAnimationEffectSlideBottom: frame.origin.y = NSMinY(self.frame) - NSHeight(self.frame) - [[self window] contentBorderThicknessForEdge:NSMinYEdge]; break;
+        case CNChildViewAnimationEffectSlideLeft:   frame.origin.x = NSMinX(self.frame) - NSWidth(self.frame); break;
+        default:
+            break;
+    }
+    CNLogForRect(frame);
+    return frame;
 }
 
 
@@ -191,11 +206,10 @@ static NSFont *defaultTextFont;
 
 - (void)drawRect:(NSRect)rect
 {
-    NSRect dirtyRect = self.bounds;
-    
     if ([[self subviews] count] > 0 && self.preventDrawingWithSubviews && !_isAnimating)
         return;
 
+    NSRect dirtyRect = self.bounds;
     CGFloat textBoxOriginX = (NSWidth(dirtyRect) - self.textBoxWidth) / 2;
     CGFloat textBoxOriginY;
 
@@ -227,18 +241,11 @@ static NSFont *defaultTextFont;
 {
     [self addSubview:childView];
     [_childViewStack addObject:childView];
-    NSRect childViewFrame = childView.bounds;
-    
-    switch (effect) {
-        case CNChildViewAnimationEffectFade:        [childView setAlphaValue:0.0f]; break;
-        case CNChildViewAnimationEffectSlideTop:    childViewFrame.origin.y = NSMaxY(self.frame)+1; break;
-        case CNChildViewAnimationEffectSlideRight:  childViewFrame.origin.x = NSMaxX(self.frame)+1; break;
-        case CNChildViewAnimationEffectSlideBottom: childViewFrame.origin.y = NSMinY(self.frame) - NSHeight(self.frame); break;
-        case CNChildViewAnimationEffectSlideLeft:   childViewFrame.origin.x = NSMinX(self.frame) - NSWidth(self.frame); break;
-        default:
-            break;
-    }
-    childView.frame = childViewFrame;
+
+    if (effect == CNChildViewAnimationEffectFade)
+        [childView setAlphaValue:0.0f];
+
+    childView.frame = [self frameForView:childView withAnimationEffect:effect];
 
     _isAnimating = YES;
     [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
@@ -266,22 +273,17 @@ static NSFont *defaultTextFont;
 - (void)popChildViewWithAnimationEffect:(CNChildViewAnimationEffect)effect usingCompletionHandler:(void(^)(void))completionHandler
 {
     NSView *lastChildView = [_childViewStack lastObject];
-    __block NSRect childViewFrame = lastChildView.frame;
+    __block NSRect childViewFrame;
 
     _isAnimating = YES;
     [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
         context.duration = (effect != CNChildViewAnimationEffectNone ? animationDuration : 0.0f);
         context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
 
-        switch (effect) {
-            case CNChildViewAnimationEffectFade:        [[lastChildView animator]  setAlphaValue:0.0f]; break;
-            case CNChildViewAnimationEffectSlideTop:    childViewFrame.origin.y = NSMaxY(self.frame)+1; break;
-            case CNChildViewAnimationEffectSlideRight:  childViewFrame.origin.x = NSMaxX(self.frame)+1; break;
-            case CNChildViewAnimationEffectSlideBottom: childViewFrame.origin.y = NSMinY(self.frame) - NSHeight(self.frame); break;
-            case CNChildViewAnimationEffectSlideLeft:   childViewFrame.origin.x = NSMinX(self.frame) - NSWidth(self.frame); break;
-            default:
-                break;
-        }
+        if (effect == CNChildViewAnimationEffectFade)
+            [[lastChildView animator] setAlphaValue:0.0f];
+
+        childViewFrame = [self frameForView:lastChildView withAnimationEffect:effect];
         [[lastChildView animator] setFrame:childViewFrame];
 
     } completionHandler:^{
