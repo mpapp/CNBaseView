@@ -179,8 +179,6 @@ typedef enum {
 
 /**
  Pops the child view and updates the display.
- 
- @warning There is still a drawing bug if animation effect is one of the sliding effects!
  */
 - (void)popChildViewWithAnimationEffect:(CNChildViewAnimationEffect)effect usingCompletionHandler:(void(^)(void))completionHandler;
 
