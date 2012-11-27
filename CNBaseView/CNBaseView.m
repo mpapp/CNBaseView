@@ -189,8 +189,10 @@ static NSFont *defaultTextFont;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - NSView
 
-- (void)drawRect:(NSRect)dirtyRect
+- (void)drawRect:(NSRect)rect
 {
+    NSRect dirtyRect = self.bounds;
+    
     if ([[self subviews] count] > 0 && self.preventDrawingWithSubviews && !_isAnimating)
         return;
 
@@ -226,7 +228,7 @@ static NSFont *defaultTextFont;
     [self addSubview:childView];
     [_childViewStack addObject:childView];
     NSRect childViewFrame = childView.bounds;
-
+    
     switch (effect) {
         case CNChildViewAnimationEffectFade:        [childView setAlphaValue:0.0f]; break;
         case CNChildViewAnimationEffectSlideTop:    childViewFrame.origin.y = NSMaxY(self.frame)+1; break;
