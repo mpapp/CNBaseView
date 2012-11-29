@@ -195,7 +195,6 @@ static NSFont *defaultTextFont;
         default:
             break;
     }
-    CNLogForRect(frame);
     return frame;
 }
 
