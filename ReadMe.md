@@ -7,7 +7,7 @@ Here is a shot of the included example application:
 
 
 ###Requirements
-`CNBackstageController` was written using ARC and should run on 10.7 and above.
+`CNBaseView` was written using ARC and should run on 10.7 and above.
 
 
 ###Contribution

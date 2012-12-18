@@ -195,7 +195,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = CN;
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "cocoa:naut";
 			};
 			buildConfigurationList = AA7626E3165F913D00C27F44 /* Build configuration list for PBXProject "CNBaseView Example" */;
@@ -295,6 +295,7 @@
 		AA2750FA16600BC30009E012 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -302,6 +303,7 @@
 		AA2750FB16600BC30009E012 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
