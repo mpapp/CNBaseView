@@ -148,6 +148,7 @@ static NSFont *defaultTextFont;
         _text = theText;
         _attributedText = [[NSAttributedString alloc] initWithString:_text attributes:_textBoxAttributes];
         [self calculateTextBoxRect];
+        [self setNeedsDisplay:YES];
     }
 }
 
@@ -159,6 +160,7 @@ static NSFont *defaultTextFont;
         _text = _attributedText.string;
         _textBoxAttributes = [_attributedText attributesAtIndex:0 effectiveRange:NULL];
         [self calculateTextBoxRect];
+        [self setNeedsDisplay:YES];
     }
 }
 
@@ -167,6 +169,7 @@ static NSFont *defaultTextFont;
     if (_textBoxWidth != textBoxWidth) {
         _textBoxWidth = textBoxWidth;
         [self calculateTextBoxRect];
+        [self setNeedsDisplay:YES];
     }
 }
 
