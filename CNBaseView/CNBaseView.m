@@ -33,7 +33,6 @@
 
 
 static const CGFloat animationDuration = 0.30f;
-
 static const CGFloat kDefaultTextboxWidth = 350.0f;
 static const CGFloat kDefaultIconVerticalOffset = 10.0f;
 static const CGFloat kDefaultIconTextMargin = 10.0f;
@@ -41,15 +40,18 @@ static const CGFloat kDefaultIconTextMargin = 10.0f;
 static NSColor *defaultTextColor, *defaultShadowColor;
 static NSFont *defaultTextFont;
 
+
 @interface CNBaseView () {
-    CGRect _calculatedTextBoxRect;
     NSDictionary *_textBoxAttributes;
     NSMutableArray *_childViewStack;
     BOOL _isAnimating;
 }
+@property (assign, nonatomic) CGRect calculatedTextBoxRect;
+
 - (void)commonConfiguration;
-- (void)calculateTextBoxRect;
 - (NSRect)frameForView:(NSView *)theView withAnimationEffect:(CNChildViewAnimationEffect)effect;
+- (BOOL)hasIcon;
+-  (BOOL)hasText;
 @end
 
 @implementation CNBaseView
@@ -69,7 +71,6 @@ static NSFont *defaultTextFont;
     self = [super init];
     if (self) {
         [self commonConfiguration];
-        [self calculateTextBoxRect];
     }
     return self;
 }
@@ -79,7 +80,6 @@ static NSFont *defaultTextFont;
     self = [super initWithFrame:frame];
     if (self) {
         [self commonConfiguration];
-        [self calculateTextBoxRect];
     }
     return self;
 }
@@ -90,7 +90,6 @@ static NSFont *defaultTextFont;
     if (self) {
         _icon = icon;
         _text = text;
-        [self calculateTextBoxRect];
     }
     return self;
 }
@@ -101,7 +100,6 @@ static NSFont *defaultTextFont;
     if (self) {
         _icon = icon;
         _attributedText = attributedText;
-        [self calculateTextBoxRect];
     }
     return self;
 }
@@ -145,21 +143,19 @@ static NSFont *defaultTextFont;
 {
     if (![_text isEqualToString:theText]) {
         _text = nil;
-        _text = theText;
+        _text = (theText == nil ? @"" : theText);
         _attributedText = [[NSAttributedString alloc] initWithString:_text attributes:_textBoxAttributes];
-        [self calculateTextBoxRect];
         [self setNeedsDisplay:YES];
     }
 }
 
 - (void)setAttributedText:(NSAttributedString *)attributedText
 {
-    if (![_text isEqualToString:attributedText.string]) {
+    if (attributedText != nil && ![_text isEqualToString:attributedText.string]) {
         _attributedText = nil;
         _attributedText = attributedText;
         _text = _attributedText.string;
         _textBoxAttributes = [_attributedText attributesAtIndex:0 effectiveRange:NULL];
-        [self calculateTextBoxRect];
         [self setNeedsDisplay:YES];
     }
 }
@@ -168,24 +164,24 @@ static NSFont *defaultTextFont;
 {
     if (_textBoxWidth != textBoxWidth) {
         _textBoxWidth = textBoxWidth;
-        [self calculateTextBoxRect];
         [self setNeedsDisplay:YES];
     }
 }
 
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma mark - Private Helper
-
-- (void)calculateTextBoxRect
+- (CGRect)calculatedTextBoxRect
 {
     if (_text != nil && ![_text isEqualToString:@""]) {
         _calculatedTextBoxRect = [_text boundingRectWithSize:NSMakeSize(_textBoxWidth, 0)
                                                      options:NSStringDrawingUsesLineFragmentOrigin
                                                   attributes:_textBoxAttributes];
     }
+    return _calculatedTextBoxRect;
 }
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark - Private Helper
 
 - (NSRect)frameForView:(NSView *)theView withAnimationEffect:(CNChildViewAnimationEffect)effect
 {
@@ -201,6 +197,16 @@ static NSFont *defaultTextFont;
     return frame;
 }
 
+- (BOOL)hasIcon
+{
+    return self.icon != nil;
+}
+
+-  (BOOL)hasText
+{
+    return (self.text != nil && ![self.text isEqualToString:@""]);
+}
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -212,20 +218,27 @@ static NSFont *defaultTextFont;
         return;
 
     NSRect dirtyRect = self.bounds;
-    CGFloat textBoxOriginX = (NSWidth(dirtyRect) - NSWidth(_calculatedTextBoxRect)) / 2;
+    CGFloat textBoxOriginX = (NSWidth(dirtyRect) - NSWidth(self.calculatedTextBoxRect)) / 2;
     CGFloat textBoxOriginY;
 
     CGRect imageRect = CGRectZero;
-    if (self.icon) {
+    if ([self hasIcon]  && [self hasText]) {
         imageRect = NSMakeRect((dirtyRect.size.width - self.icon.size.width) / 2,
                                (dirtyRect.size.height - self.icon.size.height) / 2 + self.iconVerticalOffset,
                                self.icon.size.width,
                                self.icon.size.height);
         [self.icon drawAtPoint:imageRect.origin fromRect:dirtyRect operation:NSCompositeSourceAtop fraction:1.0f];
-        textBoxOriginY = NSMinY(imageRect) - NSHeight(_calculatedTextBoxRect) - self.iconTextMargin;
+        textBoxOriginY = NSMinY(imageRect) - NSHeight(self.calculatedTextBoxRect) - self.iconTextMargin;
+
+    } else if ([self hasIcon]) {
+        imageRect = NSMakeRect((dirtyRect.size.width - self.icon.size.width) / 2,
+                               (dirtyRect.size.height - self.icon.size.height) / 2,
+                               self.icon.size.width,
+                               self.icon.size.height);
+        [self.icon drawAtPoint:imageRect.origin fromRect:dirtyRect operation:NSCompositeSourceAtop fraction:1.0f];
 
     } else {
-        textBoxOriginY = (NSHeight(dirtyRect) - NSHeight(_calculatedTextBoxRect)) / 2;
+        textBoxOriginY = (NSHeight(dirtyRect) - NSHeight(self.calculatedTextBoxRect)) / 2;
     }
 
     if (![self.text isEqualToString:@""]) {
