@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
 		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3083</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2844</string>
+			<string key="NS.object.0">3083</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBNSLayoutConstraint</string>
@@ -1511,7 +1511,7 @@
 								<string key="NSContents"/>
 								<string key="NSCellIdentifier">_NS:9</string>
 								<reference key="NSControlView" ref="970377185"/>
-								<double key="NSMaxValue">550</double>
+								<double key="NSMaxValue">600</double>
 								<double key="NSMinValue">300</double>
 								<double key="NSValue">350</double>
 								<double key="NSAltIncValue">0.0</double>
@@ -1576,7 +1576,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="983317328">
 								<int key="NSCellFlags">68157504</int>
 								<int key="NSCellFlags2">71566336</int>
-								<string key="NSContents">550</string>
+								<string key="NSContents">600</string>
 								<reference key="NSSupport" ref="22"/>
 								<string key="NSCellIdentifier">_NS:1535</string>
 								<reference key="NSControlView" ref="209432547"/>

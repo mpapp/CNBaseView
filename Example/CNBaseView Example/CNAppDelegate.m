@@ -27,7 +27,7 @@ static NSImage *kDefaultIcon;
 
 - (void)awakeFromNib
 {
-    self.demoView.textBoxWidth = 400;
+    self.demoView.textBoxWidth = 350;
     [self.textBoxWidthSlider setFloatValue:self.demoView.textBoxWidth];
     [self.textBoxWidthSlider setNeedsDisplay];
     

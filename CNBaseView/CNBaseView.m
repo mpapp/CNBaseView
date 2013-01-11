@@ -125,15 +125,15 @@ static NSFont *defaultTextFont;
     [textStyle setAlignment: NSCenterTextAlignment];
 
     _calculatedTextBoxRect = NSZeroRect;
-    
+
     /// default text attributes
     _textBoxAttributes = @{
-        NSFontAttributeName :               defaultTextFont,
-        NSForegroundColorAttributeName :    defaultTextColor,
-        NSShadowAttributeName :             textShadow,
-        NSParagraphStyleAttributeName :     textStyle,
-        NSKernAttributeName :               @0.95f
-    };
+                           NSFontAttributeName :               defaultTextFont,
+                           NSForegroundColorAttributeName :    defaultTextColor,
+                           NSShadowAttributeName :             textShadow,
+                           NSParagraphStyleAttributeName :     textStyle,
+                           NSKernAttributeName :               @0.95f
+                           };
 }
 
 
@@ -180,7 +180,7 @@ static NSFont *defaultTextFont;
 
 - (void)calculateTextBoxRect
 {
-    if (![_text isEqualToString:@""]) {
+    if (_text != nil && ![_text isEqualToString:@""]) {
         _calculatedTextBoxRect = [_text boundingRectWithSize:NSMakeSize(_textBoxWidth, 0)
                                                      options:NSStringDrawingUsesLineFragmentOrigin
                                                   attributes:_textBoxAttributes];
@@ -212,7 +212,7 @@ static NSFont *defaultTextFont;
         return;
 
     NSRect dirtyRect = self.bounds;
-    CGFloat textBoxOriginX = (NSWidth(dirtyRect) - self.textBoxWidth) / 2;
+    CGFloat textBoxOriginX = (NSWidth(dirtyRect) - NSWidth(_calculatedTextBoxRect)) / 2;
     CGFloat textBoxOriginY;
 
     CGRect imageRect = CGRectZero;
@@ -287,7 +287,7 @@ static NSFont *defaultTextFont;
 
         childViewFrame = [self frameForView:lastChildView withAnimationEffect:effect];
         [[lastChildView animator] setFrame:childViewFrame];
-
+        
     } completionHandler:^{
         _isAnimating = NO;
         [lastChildView removeFromSuperview];
