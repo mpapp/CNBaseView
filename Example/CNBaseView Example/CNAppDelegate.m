@@ -66,7 +66,7 @@ static NSImage *kDefaultIcon;
 
 - (IBAction)addMessageCheckboxAction:(id)sender
 {
-    self.demoView.text = ([self.addMessageCheckbox state] == NSOnState ? kDefaultEmptyMessageString : @"");
+    self.demoView.text = ([self.addMessageCheckbox state] == NSOnState ? kDefaultEmptyMessageString : nil);
     [self.demoView setNeedsDisplay:YES];
 }
 - (IBAction)addViewCheckboxAction:(id)sender
