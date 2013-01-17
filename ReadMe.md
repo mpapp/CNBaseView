@@ -1,5 +1,3 @@
-**[View builds]((http://travis-ci.org/phranck/github_v3_api) | master: ![Build status - master branch](https://secure.travis-ci.org/phranck/github_v3_api.png?branch=master)**
-
 ##Overview
 `CNBaseView` is a subclass of `NSView` that can show an icon and/or a text message if it has no subviews. Both, the icon and the message text are optional. If you keep it empty `CNBaseView` acts as a normal `NSView`.
 
