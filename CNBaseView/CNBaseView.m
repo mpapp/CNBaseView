@@ -33,7 +33,7 @@
 
 
 static const CGFloat animationDuration = 0.30f;
-static const CGFloat kDefaultTextboxWidth = 350.0f;
+static const CGFloat kDefaultTextboxWidth = 180.0f;
 static const CGFloat kDefaultIconVerticalOffset = 10.0f;
 static const CGFloat kDefaultIconTextMargin = 10.0f;
 
@@ -113,6 +113,7 @@ static NSFont *defaultTextFont;
     _preventDrawingWithSubviews = YES;
     _childViewStack = [NSMutableArray array];
     _isAnimating = NO;
+    _text = @"No Content";
 
     /// the text box
     NSShadow *textShadow = [[NSShadow alloc] init];
@@ -126,12 +127,12 @@ static NSFont *defaultTextFont;
 
     /// default text attributes
     _textBoxAttributes = @{
-        NSFontAttributeName :               defaultTextFont,
-        NSForegroundColorAttributeName :    defaultTextColor,
-        NSShadowAttributeName :             textShadow,
-        NSParagraphStyleAttributeName :     textStyle,
-        NSKernAttributeName :               @0.95f
-    };
+                           NSFontAttributeName :               defaultTextFont,
+                           NSForegroundColorAttributeName :    defaultTextColor,
+                           NSShadowAttributeName :             textShadow,
+                           NSParagraphStyleAttributeName :     textStyle,
+                           NSKernAttributeName :               @0.95f
+                           };
 }
 
 
