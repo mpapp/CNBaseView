@@ -220,7 +220,7 @@ static NSFont *defaultTextFont;
 
     NSRect dirtyRect = self.bounds;
     CGFloat textBoxOriginX = (NSWidth(dirtyRect) - NSWidth(self.calculatedTextBoxRect)) / 2;
-    CGFloat textBoxOriginY;
+    CGFloat textBoxOriginY = NSNotFound;
 
     CGRect imageRect = CGRectZero;
     if ([self hasIcon]  && [self hasText]) {
