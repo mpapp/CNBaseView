@@ -188,6 +188,22 @@ static NSFont *defaultTextFont;
     return _calculatedTextBoxRect;
 }
 
+- (void)setIconVerticalOffset:(CGFloat)iconVerticalOffset
+{
+    if (_iconVerticalOffset != iconVerticalOffset) {
+        _iconVerticalOffset = iconVerticalOffset;
+        [self setNeedsDisplay:YES];
+    }
+}
+
+- (void)setIconTextMargin:(CGFloat)iconTextMargin
+{
+    if (_iconTextMargin != iconTextMargin) {
+        _iconTextMargin = iconTextMargin;
+        [self setNeedsDisplay:YES];
+    }
+}
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
