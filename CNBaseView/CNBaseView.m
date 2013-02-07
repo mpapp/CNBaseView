@@ -84,6 +84,15 @@ static NSFont *defaultTextFont;
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self commonConfiguration];
+    }
+    return self;
+}
+
 - (id)initWithIcon:(NSImage *)icon text:(NSString *)text
 {
     self = [self init];
