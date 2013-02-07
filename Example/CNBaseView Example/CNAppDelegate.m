@@ -67,7 +67,6 @@ static NSImage *kDefaultIcon;
 - (IBAction)addMessageCheckboxAction:(id)sender
 {
     self.demoView.text = ([self.addMessageCheckbox state] == NSOnState ? kDefaultEmptyMessageString : nil);
-    [self.demoView setNeedsDisplay:YES];
 }
 - (IBAction)addViewCheckboxAction:(id)sender
 {
@@ -88,19 +87,16 @@ static NSImage *kDefaultIcon;
 - (IBAction)textBoxWidthSliderAction:(id)sender
 {
     self.demoView.textBoxWidth = [self.textBoxWidthSlider floatValue];
-    [self.demoView setNeedsDisplay:YES];
 }
 
 - (IBAction)iconOffsetSliderAction:(id)sender
 {
     self.demoView.iconVerticalOffset = [self.iconOffsetSlider floatValue];
-    [self.demoView setNeedsDisplay:YES];
 }
 
 - (IBAction)iconTextMarginSliderAction:(id)sender
 {
     self.demoView.iconTextMargin = [self.iconTextMarginSlider floatValue];
-    [self.demoView setNeedsDisplay:YES];
 }
 
 - (IBAction)preventDrawingCheckboxAction:(id)sender
