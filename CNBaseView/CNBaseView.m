@@ -136,12 +136,12 @@ static NSFont *defaultTextFont;
 
     /// default text attributes
     _textBoxAttributes = @{
-                           NSFontAttributeName :               defaultTextFont,
-                           NSForegroundColorAttributeName :    defaultTextColor,
-                           NSShadowAttributeName :             textShadow,
-                           NSParagraphStyleAttributeName :     textStyle,
-                           NSKernAttributeName :               @0.95f
-                           };
+        NSFontAttributeName :               defaultTextFont,
+        NSForegroundColorAttributeName :    defaultTextColor,
+        NSShadowAttributeName :             textShadow,
+        NSParagraphStyleAttributeName :     textStyle,
+        NSKernAttributeName :               @0.95f
+    };
 }
 
 
