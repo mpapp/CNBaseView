@@ -217,7 +217,8 @@ static NSFont *defaultTextFont;
         case CNChildViewAnimationEffectSlideRight:  frame.origin.x = NSMaxX(self.frame); break;
         case CNChildViewAnimationEffectSlideBottom: frame.origin.y = NSMinY(self.frame) - NSHeight(self.frame) - [[self window] contentBorderThicknessForEdge:NSMinYEdge]; break;
         case CNChildViewAnimationEffectSlideLeft:   frame.origin.x = NSMinX(self.frame) - NSWidth(self.frame); break;
-        default: break;
+        default:
+            break;
     }
     return frame;
 }
