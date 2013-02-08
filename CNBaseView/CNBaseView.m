@@ -211,7 +211,7 @@ static NSFont *defaultTextFont;
 
 - (NSRect)frameForView:(NSView *)theView withAnimationEffect:(CNChildViewAnimationEffect)effect
 {
-    NSRect frame = theView.bounds;
+    NSRect frame = self.bounds;
     switch (effect) {
         case CNChildViewAnimationEffectSlideTop:    frame.origin.y = NSMaxY(self.frame) - [[self window] contentBorderThicknessForEdge:NSMaxYEdge]; break;
         case CNChildViewAnimationEffectSlideRight:  frame.origin.x = NSMaxX(self.frame); break;
@@ -326,7 +326,7 @@ static NSFont *defaultTextFont;
 
         childViewFrame = [self frameForView:lastChildView withAnimationEffect:effect];
         [[lastChildView animator] setFrame:childViewFrame];
-        
+
     } completionHandler:^{
         _isAnimating = NO;
         [lastChildView removeFromSuperview];
