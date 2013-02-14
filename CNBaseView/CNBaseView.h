@@ -48,9 +48,9 @@ typedef enum {
 
 /**
  Creates and return an `CNBaseView` instance that is displaying the given icon and text.
- 
+
  The text is displayed as an attributed string with the internal default text attributes:
- 
+
     NSFontAttributeName :               [NSFont fontWithName:@"HelveticaNeue-Medium" size:18.0f],
     NSForegroundColorAttributeName :    [NSColor lightGrayColor],
     NSShadowAttributeName :             white shadow color with a shadow offset (0, -1),
@@ -82,7 +82,7 @@ typedef enum {
 
 /**
  A string with a message.
- 
+
  This string will be show below the icon in a distance of the value by iconTextMargin.
  */
 @property (strong, nonatomic) NSString *text;
@@ -101,7 +101,7 @@ typedef enum {
 
 /**
  Float value to define the width of the text box rectangle.
- 
+
  The height of the text box rectangle is calculated automatically.<br />
  The default value is `350.0f`.
  */
@@ -109,14 +109,14 @@ typedef enum {
 
 /**
  Float value to define a vertical offset for the icons view point.
- 
+
  The default value is `10.0f`.
  */
 @property (assign, nonatomic) CGFloat iconVerticalOffset;
 
 /**
  Float value to define the distance between icon and text message.
- 
+
  The distance is measured from the bottom icon edge (NSMinY(iconRect)) to the top text box edge (NSMaxY(textRect)).<br />
  The default value is `10.0f`.
  */
@@ -124,15 +124,23 @@ typedef enum {
 
 /**
  Property with a boolean value that indicates whether `CNBaseView` should draw an icon and text if there are subviews present or not.
- 
- Normally you will add subviews to this view that acts as a root view. If `CNBaseView` is detecting just one subview it will 
+
+ Normally you will add subviews to this view that acts as a root view. If `CNBaseView` is detecting just one subview it will
  prevent drawing the icon and text. This is the default behavior.<br />
  But sometimes you may would like to `CNBaseView` keep drawing its icon and text message even if there are subviews or not. In this
  case you have to set it to `NO'.
- 
+
  @param preventDrawingWithSubviews  `YES` (default value) will stop drawing the icon and text if there are subviews available. `NO` will always draw the icon and text.
  */
 @property (assign) BOOL preventDrawingWithSubviews;
+
+/**
+ Property to set the backgroundcolor of the view.
+
+ Due to the fact that the value of this property is passed through the receivers layer `CNBaseView` is switching
+ `[self setWantsLayer:YES];` to ON by default. You can use any `NSColor` instances and colors with pattern images too.
+ */
+@property (assign, nonatomic) NSColor *backgroundColor;
 
 
 #pragma mark - Handling Subviews
@@ -140,9 +148,9 @@ typedef enum {
 
 /**
  Pushs in another view as subview using the defined animation effect.
- 
+
  There are several animation effects available:
- 
+
     typedef enum {
         CNChildViewAnimationEffectNone = 0,
         CNChildViewAnimationEffectFade,
@@ -151,7 +159,7 @@ typedef enum {
         CNChildViewAnimationEffectSlideBottom,
         CNChildViewAnimationEffectSlideLeft
     } CNChildViewAnimationEffect;
- 
+
  `CNChildViewAnimationEffectNone`<br />
  The child view will be shown immediatly without an animation effect. It abolishes the setting of preventDrawingWithSubviews, the icon and text are not drawn.
 

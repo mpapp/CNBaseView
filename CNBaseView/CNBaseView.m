@@ -32,6 +32,33 @@
 #import "CNBaseView.h"
 
 
+#if MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_7
+@interface NSColor (CNBaseView)
++ (CGColorRef)CIColorToCGColor:(CIColor *)ciColor;
+- (CGColorRef)CGColor;
+@end
+
+@implementation NSColor (CNBaseView)
++ (CGColorRef)CIColorToCGColor:(CIColor *)ciColor
+{
+    CGColorSpaceRef colorSpace = [ciColor colorSpace];
+    const CGFloat *components = [ciColor components];
+    CGColorRef cgColor = CGColorCreate (colorSpace, components);
+    CGColorSpaceRelease(colorSpace);
+    return cgColor;
+}
+
+- (CGColorRef)CGColor
+{
+    CIColor *ciColor = [[CIColor alloc] initWithColor: self];
+    CGColorRef cgColor = [NSColor CIColorToCGColor: ciColor];
+    return cgColor;
+}
+@end
+#endif
+
+
+
 static const CGFloat animationDuration = 0.30f;
 static const CGFloat kDefaultTextboxWidth = 180.0f;
 static const CGFloat kDefaultIconVerticalOffset = 10.0f;
@@ -39,7 +66,6 @@ static const CGFloat kDefaultIconTextMargin = 10.0f;
 
 static NSColor *defaultTextColor, *defaultShadowColor;
 static NSFont *defaultTextFont;
-
 
 @interface CNBaseView () {
     NSDictionary *_textBoxAttributes;
@@ -115,6 +141,8 @@ static NSFont *defaultTextFont;
 
 - (void)commonConfiguration
 {
+    [self setWantsLayer:YES];
+
     _icon = nil;
     _textBoxWidth = kDefaultTextboxWidth;
     _iconVerticalOffset = kDefaultIconVerticalOffset;
@@ -122,7 +150,7 @@ static NSFont *defaultTextFont;
     _preventDrawingWithSubviews = YES;
     _childViewStack = [NSMutableArray array];
     _isAnimating = NO;
-    _text = @"No Content";
+    _text = @"";
 
     /// the text box
     NSShadow *textShadow = [[NSShadow alloc] init];
@@ -142,6 +170,9 @@ static NSFont *defaultTextFont;
         NSParagraphStyleAttributeName :     textStyle,
         NSKernAttributeName :               @0.95f
     };
+
+    _backgroundColor = [NSColor clearColor];
+    self.layer.backgroundColor = [_backgroundColor CGColor];
 }
 
 
@@ -204,6 +235,13 @@ static NSFont *defaultTextFont;
     }
 }
 
+- (void)setBackgroundColor:(NSColor *)backgroundColor
+{
+    _backgroundColor = backgroundColor;
+    self.layer.backgroundColor = [backgroundColor CGColor];
+    [self.layer setNeedsDisplay];
+}
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -253,7 +291,8 @@ static NSFont *defaultTextFont;
                                (dirtyRect.size.height - self.icon.size.height) / 2 + self.iconVerticalOffset,
                                self.icon.size.width,
                                self.icon.size.height);
-        [self.icon drawAtPoint:imageRect.origin fromRect:dirtyRect operation:NSCompositeSourceAtop fraction:1.0f];
+        [self.icon drawAtPoint:imageRect.origin fromRect:dirtyRect operation:NSCompositeSourceOver fraction:1.0f];
+
         textBoxOriginY = NSMinY(imageRect) - NSHeight(self.calculatedTextBoxRect) - self.iconTextMargin;
 
     } else if ([self hasIcon]) {
@@ -261,7 +300,7 @@ static NSFont *defaultTextFont;
                                (dirtyRect.size.height - self.icon.size.height) / 2,
                                self.icon.size.width,
                                self.icon.size.height);
-        [self.icon drawAtPoint:imageRect.origin fromRect:dirtyRect operation:NSCompositeSourceAtop fraction:1.0f];
+        [self.icon drawAtPoint:imageRect.origin fromRect:dirtyRect operation:NSCompositeSourceOver fraction:1.0f];
 
     } else {
         textBoxOriginY = (NSHeight(dirtyRect) - NSHeight(self.calculatedTextBoxRect)) / 2;
@@ -326,7 +365,7 @@ static NSFont *defaultTextFont;
 
         childViewFrame = [self frameForView:lastChildView withAnimationEffect:effect];
         [[lastChildView animator] setFrame:childViewFrame];
-
+        
     } completionHandler:^{
         _isAnimating = NO;
         [lastChildView removeFromSuperview];

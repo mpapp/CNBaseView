@@ -369,6 +369,7 @@
 				GCC_PREFIX_HEADER = "CNBaseView Example/CNBaseView Example-Prefix.pch";
 				INFOPLIST_FILE = "CNBaseView Example/CNBaseView Example-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -381,6 +382,7 @@
 				GCC_PREFIX_HEADER = "CNBaseView Example/CNBaseView Example-Prefix.pch";
 				INFOPLIST_FILE = "CNBaseView Example/CNBaseView Example-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
