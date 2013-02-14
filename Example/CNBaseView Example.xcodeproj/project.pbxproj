@@ -33,6 +33,7 @@
 		AA762704165F913D00C27F44 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA762702165F913D00C27F44 /* MainMenu.xib */; };
 		AA762713165F95E800C27F44 /* CNBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA762712165F95E800C27F44 /* CNBaseView.m */; };
 		AA76271A165FA11B00C27F44 /* IconFlower.png in Resources */ = {isa = PBXBuildFile; fileRef = AA762719165FA11B00C27F44 /* IconFlower.png */; };
+		FD653B0216CDA1C9002EA0F8 /* paper-background-pattern.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD653B0116CDA1C9002EA0F8 /* paper-background-pattern.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		AA762712165F95E800C27F44 /* CNBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNBaseView.m; sourceTree = "<group>"; };
 		AA762718165F969000C27F44 /* CNLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNLog.h; sourceTree = "<group>"; };
 		AA762719165FA11B00C27F44 /* IconFlower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconFlower.png; sourceTree = "<group>"; };
+		FD653B0116CDA1C9002EA0F8 /* paper-background-pattern.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "paper-background-pattern.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 		AA7626F4165F913D00C27F44 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FD653B0116CDA1C9002EA0F8 /* paper-background-pattern.jpg */,
 				AA762718165F969000C27F44 /* CNLog.h */,
 				AA7626F5165F913D00C27F44 /* CNBaseView Example-Info.plist */,
 				AA7626F6165F913D00C27F44 /* InfoPlist.strings */,
@@ -226,6 +229,7 @@
 				AA762704165F913D00C27F44 /* MainMenu.xib in Resources */,
 				AA76271A165FA11B00C27F44 /* IconFlower.png in Resources */,
 				AA27511F16602E1F0009E012 /* CNDummyContentView.xib in Resources */,
+				FD653B0216CDA1C9002EA0F8 /* paper-background-pattern.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,8 +372,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CNBaseView Example/CNBaseView Example-Prefix.pch";
 				INFOPLIST_FILE = "CNBaseView Example/CNBaseView Example-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx10.8;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -381,8 +386,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CNBaseView Example/CNBaseView Example-Prefix.pch";
 				INFOPLIST_FILE = "CNBaseView Example/CNBaseView Example-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx10.8;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

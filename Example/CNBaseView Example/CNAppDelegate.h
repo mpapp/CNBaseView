@@ -20,6 +20,7 @@
 @property (strong) IBOutlet NSSlider *iconTextMarginSlider;
 @property (strong) IBOutlet NSButton *preventDrawingCheckbox;
 @property (strong) IBOutlet NSPopUpButton *animationEffectPopupButton;
+@property (strong) IBOutlet NSMatrix *showBackground;
 
 
 - (IBAction)addIconCheckboxAction:(id)sender;
@@ -30,5 +31,6 @@
 - (IBAction)iconTextMarginSliderAction:(id)sender;
 - (IBAction)preventDrawingCheckboxAction:(id)sender;
 - (IBAction)animationEffectPopupButtonAction:(id)sender;
+- (IBAction)showBackgroundAction:(id)sender;
 
 @end

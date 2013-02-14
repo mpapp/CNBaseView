@@ -32,32 +32,6 @@
 #import "CNBaseView.h"
 
 
-#if MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_7
-@interface NSColor (CNBaseView)
-+ (CGColorRef)CIColorToCGColor:(CIColor *)ciColor;
-- (CGColorRef)CGColor;
-@end
-
-@implementation NSColor (CNBaseView)
-+ (CGColorRef)CIColorToCGColor:(CIColor *)ciColor
-{
-    CGColorSpaceRef colorSpace = [ciColor colorSpace];
-    const CGFloat *components = [ciColor components];
-    CGColorRef cgColor = CGColorCreate (colorSpace, components);
-    CGColorSpaceRelease(colorSpace);
-    return cgColor;
-}
-
-- (CGColorRef)CGColor
-{
-    CIColor *ciColor = [[CIColor alloc] initWithColor: self];
-    CGColorRef cgColor = [NSColor CIColorToCGColor: ciColor];
-    return cgColor;
-}
-@end
-#endif
-
-
 
 static const CGFloat animationDuration = 0.30f;
 static const CGFloat kDefaultTextboxWidth = 180.0f;
@@ -281,7 +255,7 @@ static NSFont *defaultTextFont;
     if ([[self subviews] count] > 0 && self.preventDrawingWithSubviews && !_isAnimating)
         return;
 
-    NSRect dirtyRect = self.bounds;
+    NSRect dirtyRect = [self bounds];
     CGFloat textBoxOriginX = (NSWidth(dirtyRect) - NSWidth(self.calculatedTextBoxRect)) / 2;
     CGFloat textBoxOriginY = NSNotFound;
 
