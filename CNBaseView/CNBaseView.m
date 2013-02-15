@@ -32,7 +32,6 @@
 #import "CNBaseView.h"
 
 
-
 static const CGFloat animationDuration = 0.30f;
 static const CGFloat kDefaultTextboxWidth = 180.0f;
 static const CGFloat kDefaultIconVerticalOffset = 10.0f;

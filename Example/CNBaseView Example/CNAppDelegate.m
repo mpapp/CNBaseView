@@ -112,15 +112,9 @@ static NSImage *kDefaultIcon;
 - (IBAction)showBackgroundAction:(id)sender
 {
     switch ([self.showBackground selectedRow]) {
-        case 0:
-            self.demoView.backgroundColor = nil;
-            break;
-        case 1:
-            self.demoView.backgroundColor = [NSColor colorWithCalibratedRed:0.986 green:1.000 blue:0.980 alpha:1.000];
-            break;
-        case 2:
-            self.demoView.backgroundColor = [NSColor colorWithPatternImage:[NSImage imageNamed:@"paper-background-pattern"]];
-            break;
+        case 0: self.demoView.backgroundColor = nil; break;
+        case 1: self.demoView.backgroundColor = [NSColor colorWithCalibratedRed:0.986 green:1.000 blue:0.980 alpha:1.000]; break;
+        case 2: self.demoView.backgroundColor = [NSColor colorWithPatternImage:[NSImage imageNamed:@"paper-background-pattern"]]; break;
     }
 }
 
