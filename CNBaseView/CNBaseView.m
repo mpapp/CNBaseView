@@ -29,7 +29,20 @@
  */
 
 #import <QuartzCore/QuartzCore.h>
+#import <objc/runtime.h>
 #import "CNBaseView.h"
+
+
+
+CGColorRef myCGColor(id self, SEL _cmd)
+{
+    const NSInteger numberOfComponents = [self numberOfComponents];
+    CGFloat components[numberOfComponents];
+    CGColorSpaceRef colorSpace = [[self colorSpace] CGColorSpace];
+    [self getComponents:(CGFloat *)&components];
+
+    return CGColorCreate(colorSpace, components);
+}
 
 
 static const CGFloat animationDuration = 0.30f;
@@ -60,6 +73,8 @@ static NSFont *defaultTextFont;
 
 + (void)initialize
 {
+    class_addMethod([NSColor class], @selector(CGColor), (IMP)myCGColor, "{name=CGColor}@:");
+
     defaultTextColor = [NSColor lightGrayColor];
     defaultShadowColor = [NSColor whiteColor];
     defaultTextFont = [NSFont fontWithName:@"HelveticaNeue-Medium" size:18.0f];
@@ -149,7 +164,6 @@ static NSFont *defaultTextFont;
 }
 
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Acessors
 
@@ -211,7 +225,7 @@ static NSFont *defaultTextFont;
 - (void)setBackgroundColor:(NSColor *)backgroundColor
 {
     _backgroundColor = backgroundColor;
-    self.layer.backgroundColor = [backgroundColor CGColor];
+    self.layer.backgroundColor = [_backgroundColor CGColor];
     [self.layer setNeedsDisplay];
 }
 
