@@ -34,7 +34,7 @@
 
 
 
-CGColorRef CN_CGColor(id self, SEL _cmd)
+CGColorRef createCGColor(id self, SEL _cmd)
 {
     const NSInteger numberOfComponents = [self numberOfComponents];
     CGFloat components[numberOfComponents];
@@ -72,7 +72,7 @@ static NSFont *defaultTextFont;
 
 + (void)initialize
 {
-    class_addMethod([NSColor class], @selector(CGColor), (IMP)CN_CGColor, "{name=CGColor}@:");
+    class_addMethod([NSColor class], @selector(CGColor), (IMP)createCGColor, "{name=CGColor}@:");
 
     defaultTextColor = [NSColor lightGrayColor];
     defaultShadowColor = [NSColor whiteColor];
