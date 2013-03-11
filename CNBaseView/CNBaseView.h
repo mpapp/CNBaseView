@@ -186,7 +186,7 @@ typedef enum {
 - (void)pushChildView:(NSView *)childView withAnimationEffect:(CNChildViewAnimationEffect)effect usingCompletionHandler:(void(^)(void))completionHandler;
 
 /**
- ...
+ Pushs in another view as subview using the defined animation effect with a given animation duration.
  */
 - (void)pushChildView:(NSView *)childView withAnimationEffect:(CNChildViewAnimationEffect)effect duration:(CGFloat)duration usingCompletionHandler:(void(^)(void))completionHandler;
 
@@ -196,7 +196,7 @@ typedef enum {
 - (void)popChildViewWithAnimationEffect:(CNChildViewAnimationEffect)effect usingCompletionHandler:(void(^)(void))completionHandler;
 
 /**
- ...
+ Pops the child view and updates the display using a given animation duration
  */
 - (void)popChildViewWithAnimationEffect:(CNChildViewAnimationEffect)effect duration:(CGFloat)duration usingCompletionHandler:(void(^)(void))completionHandler;
 

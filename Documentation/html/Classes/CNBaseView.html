@@ -65,7 +65,11 @@
 	
 	<option value="//api/name/initWithIcon:text:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithIcon:text:</option>
 	
+	<option value="//api/name/popChildViewWithAnimationEffect:duration:usingCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- popChildViewWithAnimationEffect:duration:usingCompletionHandler:</option>
+	
 	<option value="//api/name/popChildViewWithAnimationEffect:usingCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- popChildViewWithAnimationEffect:usingCompletionHandler:</option>
+	
+	<option value="//api/name/pushChildView:withAnimationEffect:duration:usingCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- pushChildView:withAnimationEffect:duration:usingCompletionHandler:</option>
 	
 	<option value="//api/name/pushChildView:withAnimationEffect:usingCompletionHandler:">&nbsp;&nbsp;&nbsp;&nbsp;- pushChildView:withAnimationEffect:usingCompletionHandler:</option>
 	
@@ -127,7 +131,11 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithIcon:text:">initWithIcon:text:</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/popChildViewWithAnimationEffect:duration:usingCompletionHandler:">popChildViewWithAnimationEffect:duration:usingCompletionHandler:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/popChildViewWithAnimationEffect:usingCompletionHandler:">popChildViewWithAnimationEffect:usingCompletionHandler:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pushChildView:withAnimationEffect:duration:usingCompletionHandler:">pushChildView:withAnimationEffect:duration:usingCompletionHandler:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pushChildView:withAnimationEffect:usingCompletionHandler:">pushChildView:withAnimationEffect:usingCompletionHandler:</a></span></li>
 	
@@ -279,8 +287,22 @@
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/pushChildView:withAnimationEffect:duration:usingCompletionHandler:">&ndash;&nbsp;pushChildView:withAnimationEffect:duration:usingCompletionHandler:</a></code>
+		<span class="tooltip"><p>Pushs in another view as subview using the defined animation effect with a given animation duration.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/popChildViewWithAnimationEffect:usingCompletionHandler:">&ndash;&nbsp;popChildViewWithAnimationEffect:usingCompletionHandler:</a></code>
 		<span class="tooltip"><p>Pops the child view and updates the display.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/popChildViewWithAnimationEffect:duration:usingCompletionHandler:">&ndash;&nbsp;popChildViewWithAnimationEffect:duration:usingCompletionHandler:</a></code>
+		<span class="tooltip"><p>Pops the child view and updates the display using a given animation duration</p></span>
 	</span>
 	
 	
@@ -761,6 +783,42 @@ NSKernAttributeName :               @0.95f
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/popChildViewWithAnimationEffect:duration:usingCompletionHandler:" title="popChildViewWithAnimationEffect:duration:usingCompletionHandler:"></a>
+	<h3 class="subsubtitle method-title">popChildViewWithAnimationEffect:duration:usingCompletionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Pops the child view and updates the display using a given animation duration</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)popChildViewWithAnimationEffect:(CNChildViewAnimationEffect)<em>effect</em> duration:(CGFloat)<em>duration</em> usingCompletionHandler:(void ( ^ ) ( void ))<em>completionHandler</em></code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CNBaseView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/popChildViewWithAnimationEffect:usingCompletionHandler:" title="popChildViewWithAnimationEffect:usingCompletionHandler:"></a>
 	<h3 class="subsubtitle method-title">popChildViewWithAnimationEffect:usingCompletionHandler:</h3>
 	
@@ -773,6 +831,42 @@ NSKernAttributeName :               @0.95f
     
 
 	<div class="method-subsection method-declaration"><code>- (void)popChildViewWithAnimationEffect:(CNChildViewAnimationEffect)<em>effect</em> usingCompletionHandler:(void ( ^ ) ( void ))<em>completionHandler</em></code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CNBaseView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/pushChildView:withAnimationEffect:duration:usingCompletionHandler:" title="pushChildView:withAnimationEffect:duration:usingCompletionHandler:"></a>
+	<h3 class="subsubtitle method-title">pushChildView:withAnimationEffect:duration:usingCompletionHandler:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Pushs in another view as subview using the defined animation effect with a given animation duration.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)pushChildView:(NSView *)<em>childView</em> withAnimationEffect:(CNChildViewAnimationEffect)<em>effect</em> duration:(CGFloat)<em>duration</em> usingCompletionHandler:(void ( ^ ) ( void ))<em>completionHandler</em></code></div>
 
     
 	
@@ -881,7 +975,7 @@ your pushing child view has an opaque background. Otherwise the drawn <a href="#
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 cocoa:naut. All rights reserved. (Last updated: 2013-02-24)</span><br />
+						<p><span class="copyright">&copy; 2013 cocoa:naut. All rights reserved. (Last updated: 2013-03-11)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						
