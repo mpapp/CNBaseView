@@ -184,10 +184,12 @@ typedef enum {
  your pushing child view has an opaque background. Otherwise the drawn icon and text message will show through.
  */
 - (void)pushChildView:(NSView *)childView withAnimationEffect:(CNChildViewAnimationEffect)effect usingCompletionHandler:(void(^)(void))completionHandler;
+- (void)pushChildView:(NSView *)childView withAnimationEffect:(CNChildViewAnimationEffect)effect duration:(CGFloat)duration usingCompletionHandler:(void(^)(void))completionHandler;
 
 /**
  Pops the child view and updates the display.
  */
 - (void)popChildViewWithAnimationEffect:(CNChildViewAnimationEffect)effect usingCompletionHandler:(void(^)(void))completionHandler;
+- (void)popChildViewWithAnimationEffect:(CNChildViewAnimationEffect)effect duration:(CGFloat)duration usingCompletionHandler:(void(^)(void))completionHandler;
 
 @end

@@ -305,6 +305,11 @@ static NSFont *defaultTextFont;
 
 - (void)pushChildView:(NSView *)childView withAnimationEffect:(CNChildViewAnimationEffect)effect usingCompletionHandler:(void(^)(void))completionHandler
 {
+    [self pushChildView:childView withAnimationEffect:effect duration:animationDuration usingCompletionHandler:completionHandler];
+}
+
+- (void)pushChildView:(NSView *)childView withAnimationEffect:(CNChildViewAnimationEffect)effect duration:(CGFloat)duration usingCompletionHandler:(void(^)(void))completionHandler
+{
     [self addSubview:childView];
     [_childViewStack addObject:childView];
 
@@ -315,7 +320,7 @@ static NSFont *defaultTextFont;
 
     _isAnimating = YES;
     [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
-        context.duration = (effect != CNChildViewAnimationEffectNone ? animationDuration : 0.0f);
+        context.duration = (effect != CNChildViewAnimationEffectNone ? duration : 0.0f);
         context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
 
         switch (effect) {
@@ -338,12 +343,17 @@ static NSFont *defaultTextFont;
 
 - (void)popChildViewWithAnimationEffect:(CNChildViewAnimationEffect)effect usingCompletionHandler:(void(^)(void))completionHandler
 {
+    [self popChildViewWithAnimationEffect:effect duration:animationDuration usingCompletionHandler:completionHandler];
+}
+
+- (void)popChildViewWithAnimationEffect:(CNChildViewAnimationEffect)effect duration:(CGFloat)duration usingCompletionHandler:(void(^)(void))completionHandler
+{
     NSView *lastChildView = [_childViewStack lastObject];
     __block NSRect childViewFrame;
 
     _isAnimating = YES;
     [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
-        context.duration = (effect != CNChildViewAnimationEffectNone ? animationDuration : 0.0f);
+        context.duration = (effect != CNChildViewAnimationEffectNone ? duration : 0.0f);
         context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
 
         if (effect == CNChildViewAnimationEffectFade)
@@ -351,7 +361,7 @@ static NSFont *defaultTextFont;
 
         childViewFrame = [self frameForView:lastChildView withAnimationEffect:effect];
         [[lastChildView animator] setFrame:childViewFrame];
-        
+
     } completionHandler:^{
         _isAnimating = NO;
         [lastChildView removeFromSuperview];
