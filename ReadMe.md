@@ -1,3 +1,6 @@
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=phranck&url=https://github.com/phranck/CNBaseView&title=CNBaseView&tags=github&category=software)
+
+
 ##Overview
 `CNBaseView` is a subclass of `NSView` that can show an icon and/or a text message if it has no subviews. Both, the icon and the message text are optional. If you keep it empty `CNBaseView` acts as a normal `NSView`.
 
