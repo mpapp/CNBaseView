@@ -181,7 +181,7 @@ typedef enum {
  After the animation is done the completionHandler is executed.
 
  @note If you decide to use one of these effects and the value of preventDrawingWithSubviews is set to `NO` then you have to ensure that
- your pushing child view has an opaque background. Otherwise the drawn icon and text message will show through.
+ your pushing child view has an opaque background. Otherwise the drawn icon and text message will be shown through.
  */
 - (void)pushChildView:(NSView *)childView withAnimationEffect:(CNChildViewAnimationEffect)effect usingCompletionHandler:(void(^)(void))completionHandler;
 
