@@ -14,21 +14,25 @@
 	<string>cocoa:naut</string>
 	<key>--project-name</key>
 	<string>CNBaseView</string>
-	<key>--create-html</key>
-	<true/>
 	<key>--index-desc</key>
 	<string>./DocIndex.md</string>
 	<key>--output</key>
 	<string>./Documentation</string>
 	<key>include</key>
 	<string>./Documentation/Images</string>
-	<key>--verbose</key>
-	<string>xcode</string>
-	<key>--explicit-crossref</key>
+    <key>--create-docset</key>
+	<true/>
+    <key>--create-html</key>
+    <true/>
+	<key>--install-docset</key>
 	<false/>
-	<key>--repeat-first-par</key>
-	<false/>
+    <key>--keep-intermediate-files</key>
+    <true/>
+    <key>--repeat-first-par</key>
+    <false/>
 	<key>--verbose</key>
 	<integer>3</integer>
+	<key>--logformat</key>
+	<integer>1</integer>
 </dict>
 </plist>

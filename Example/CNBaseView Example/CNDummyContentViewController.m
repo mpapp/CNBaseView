@@ -15,14 +15,13 @@
 
 @implementation CNDummyContentViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.view.layer.backgroundColor = [[NSColor controlBackgroundColor] CGColor];
-    }
-    
-    return self;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+	if (self) {
+		self.view.layer.backgroundColor = [[NSColor controlBackgroundColor] CGColor];
+	}
+
+	return self;
 }
 
 @end

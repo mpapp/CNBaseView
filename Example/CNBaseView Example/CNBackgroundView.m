@@ -10,11 +10,10 @@
 
 @implementation CNBackgroundView
 
-- (void)drawRect:(NSRect)dirtyRect
-{
-    NSBezierPath *path = [NSBezierPath bezierPathWithRect:dirtyRect];
-    [[NSColor controlColor] setFill];
-    [path fill];
+- (void)drawRect:(NSRect)dirtyRect {
+	NSBezierPath *path = [NSBezierPath bezierPathWithRect:dirtyRect];
+	[[NSColor controlColor] setFill];
+	[path fill];
 }
 
 @end
