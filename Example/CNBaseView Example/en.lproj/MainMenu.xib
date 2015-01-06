@@ -781,7 +781,7 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="16" id="835"/>
                         </constraints>
-                        <sliderCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="70" doubleValue="10.526315789473683" tickMarkPosition="left" numberOfTickMarks="15" sliderType="linear" id="780"/>
+                        <sliderCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="70" doubleValue="10.526315789473683" tickMarkPosition="right" numberOfTickMarks="15" sliderType="linear" id="780"/>
                         <connections>
                             <action selector="iconTextMarginSliderAction:" target="494" id="960"/>
                         </connections>
@@ -822,7 +822,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="76" id="1179"/>
                         </constraints>
-                        <sliderCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="80" doubleValue="10.526315789473683" tickMarkPosition="left" numberOfTickMarks="15" sliderType="linear" id="876"/>
+                        <sliderCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="80" doubleValue="10.526315789473683" tickMarkPosition="right" numberOfTickMarks="15" sliderType="linear" id="876"/>
                         <connections>
                             <action selector="iconOffsetSliderAction:" target="494" id="959"/>
                         </connections>
@@ -863,7 +863,7 @@
                         <rect key="frame" x="101" y="53" width="161" height="51"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        <size key="cellSize" width="161" height="17"/>
+                        <size key="cellSize" width="146" height="18"/>
                         <size key="intercellSpacing" width="4" height="0.0"/>
                         <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" controlSize="mini" inset="2" id="1130">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>

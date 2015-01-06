@@ -1,0 +1,3 @@
+language: objective-c
+xcode_project: 'Example/CNBaseView Example.xcodeproj'
+xcode_scheme: 'CNBaseView Example'
