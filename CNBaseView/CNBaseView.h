@@ -40,7 +40,7 @@ typedef enum {
     CNChildViewAnimationEffectSlideLeft
 } CNChildViewAnimationEffect;
 
-
+IB_DESIGNABLE
 @interface CNBaseView : NSView
 
 #pragma mark View Creation
@@ -134,6 +134,7 @@ typedef enum {
  */
 @property (assign) BOOL preventDrawingWithSubviews;
 
+@property (readwrite) IBInspectable NSColor *backgroundColor;
 
 #pragma mark - Handling Subviews
 /** @name Handling Subviews */

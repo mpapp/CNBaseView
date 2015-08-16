@@ -205,6 +205,11 @@ static NSFont *defaultTextFont;
 
 - (void)drawRect:(NSRect)rect
 {
+    if (self.backgroundColor) {
+        [self.backgroundColor setFill];
+        [[NSBezierPath bezierPathWithRect:rect] fill];
+    }
+    
     if ([[self subviews] count] > 0 && self.preventDrawingWithSubviews && !_isAnimating)
         return;
 
